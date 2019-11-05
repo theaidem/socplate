@@ -1,0 +1,11 @@
+{
+  "typescript.preferences.quoteStyle": "single",
+  "tslint.configFile": "tslint.json",
+  "tslint.jsEnable": true,
+  "prettier.semi": false,
+  "prettier.trailingComma": "all",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
+  }
+}

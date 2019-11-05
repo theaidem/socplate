@@ -1,0 +1,7 @@
+docker run -v ${PWD}/migrations:/migrations --network host mgoose goose -dir /migrations create init sql
+
+docker-compose exec migrations goose -dir /migrations create init sql
+docker-compose exec migrations goose
+docker-compose exec migrations ash -c 'goose postgres "host=database user=${POSTGRES_USER} dbname=${POSTGRES_DB} password=${POSTGRES_PASSWORD} sslmode=disable" version'
+
+docker-compose exec migrations ash -c 'echo ${POSTGRES_USER}'

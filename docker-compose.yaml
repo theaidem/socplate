@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+  database:
+    image: postgres:12.0-alpine
+    ports:
+      - '127.0.0.1:${DATABASE_PORT}:5432'
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_DB}
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -d ${DATABASE_DB} -U ${DATABASE_USER}"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+  migrations:
+    build:
+      context: ./migrations
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_DB}
+    depends_on:
+      - database
+    links:
+      - database:database
+    volumes:
+      - './migrations:/migrations'
+  server:
+    build:
+      context: ./server
+    depends_on:
+      - database
+    links:
+      - database:database
+    ports:
+      - '127.0.0.1:3003:3003'
+  client:
+    build:
+      context: ./client
+    depends_on:
+      - server
+    links:
+      - server:server
+    ports:
+      - '127.0.0.1:3000:3000'

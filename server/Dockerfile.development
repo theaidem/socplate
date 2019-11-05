@@ -1,0 +1,21 @@
+FROM golang:1.13.1-alpine3.10 
+
+RUN apk add -U --no-cache ca-certificates git mercurial \
+    && go get -u github.com/jmhodges/justrun \ 
+    && apk del git mercurial
+
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH" 
+
+ENV GO111MODULE=on
+
+WORKDIR /app
+
+COPY go.mod .
+COPY go.sum .
+
+RUN go mod download
+
+EXPOSE 3003
+CMD justrun -s ash -c 'go build -o server && ./server' ./*.go

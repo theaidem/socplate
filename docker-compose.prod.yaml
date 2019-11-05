@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  database:
+    restart: always
+  server:
+    restart: always
+    build:
+      dockerfile: Dockerfile.production
+  client:
+    restart: always
+    build:
+      dockerfile: Dockerfile.production
+

@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  server:
+    build:
+      dockerfile: Dockerfile.development
+    volumes:
+      - './server:/app'
+  client:
+    build:
+      dockerfile: Dockerfile.development
+    volumes:
+      - './client/src:/app/src'
+

@@ -1,0 +1,67 @@
+/* rest of app styles */
+
+#root {
+    background-color: #fefefe;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.flex-direction-col {
+    flex-direction: column;
+}
+
+.flex-one {
+    flex: 1;
+}
+
+.flex-two {
+    flex: 2;
+}
+
+.col {
+    padding: 10px;
+}
+
+.app {
+    min-height: 100vh;
+}
+
+#root header {
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+#root header h2 {
+    margin: 0;
+}
+
+.msg-list {
+    flex-basis: 0;
+    overflow: auto;
+    flex-direction: column-reverse;
+}
+
+.user-list {
+    align-items: flex-start;
+}
+
+.room-list-items {
+    flex-basis: 100%;
+    flex-direction: column;
+}
+
+.room-list-item {
+    justify-content: space-between;
+    align-items: center;
+}
+
+#root .ui.comments {
+    max-width: initial;
+}
+
+#root .ui.comments .comment {
+    margin: 0;
+    padding: 0.2em 0 0;
+}
